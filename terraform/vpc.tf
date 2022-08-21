@@ -32,6 +32,7 @@ resource "aws_subnet" "public_subnet_terra" {
     cidr_block = element(var.subnets_cidr, count.index)
     tags = {
         Name = "Subnet-terra-${count.index+1}"
+        filter_tag = "vpc-terra-infta-subnet"
     }
 }
 
@@ -42,3 +43,4 @@ resource "aws_route_table_association" "route_table_association-terra" {
     subnet_id = element(aws_subnet.public_subnet_terra.*.id, count.index)
   
 }
+
